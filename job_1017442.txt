@@ -1,0 +1,147 @@
+
+PLAY [localhost] ***************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [Ensure mandatory vars are defined] ***************************************
+ok: [localhost] => {
+    "changed": false, 
+    "msg": "All assertions passed"
+}
+
+TASK [set_fact] ****************************************************************
+ok: [localhost]
+
+TASK [Get Available Locations] *************************************************
+ok: [localhost]
+
+TASK [Decommission - Tenant name reconfirmation] *******************************
+skipping: [localhost]
+
+TASK [AZ Login to Azure] *******************************************************
+changed: [localhost]
+
+TASK [Get date] ****************************************************************
+changed: [localhost]
+
+TASK [Get Kubernetes Cluster credendials] **************************************
+
+TASK [aks : Get date] **********************************************************
+changed: [localhost]
+
+TASK [aks : Get Kubernetes Cluster credendials] ********************************
+changed: [localhost] => (item={u'key': u'cluster2', u'value': {u'clusterName': u'UE2DCTPMCSAKS02', u'environment': u'Development', u'resourceGroupName': u'UE2DAKSRSG02', u'location': u'eastus', u'subscription': u'EY-CTSBP-DEV-CT-CONTAINERS_US-01-38370767'}})
+changed: [localhost] => (item={u'key': u'cluster1', u'value': {u'clusterName': u'UE2DCTPMCSAKS01', u'environment': u'Development', u'resourceGroupName': u'UE2DAKSRSG01', u'location': u'eastus2', u'subscription': u'EY-CTSBP-DEV-CT-CONTAINERS_US-01-38370767'}})
+
+TASK [Check if edge microgateway exist] ****************************************
+changed: [localhost] => (item={u'key': u'cluster2', u'value': {u'clusterName': u'UE2DCTPMCSAKS02', u'environment': u'Development', u'resourceGroupName': u'UE2DAKSRSG02', u'location': u'eastus', u'subscription': u'EY-CTSBP-DEV-CT-CONTAINERS_US-01-38370767'}})
+changed: [localhost] => (item={u'key': u'cluster1', u'value': {u'clusterName': u'UE2DCTPMCSAKS01', u'environment': u'Development', u'resourceGroupName': u'UE2DAKSRSG01', u'location': u'eastus2', u'subscription': u'EY-CTSBP-DEV-CT-CONTAINERS_US-01-38370767'}})
+
+TASK [debug] *******************************************************************
+ok: [localhost] => {
+    "var_mg_exist.results": [
+        {
+            "ansible_loop_var": "item", 
+            "changed": true, 
+            "cmd": "kubectl get pods -n  microgwdelete-kctcfz-dev --kubeconfig ./UE2DCTPMCSAKS02-config-1611601635.yml | grep \\"edge\\" | grep \\"Running\\" | awk '{print $3}'", 
+            "delta": "0:00:01.290245", 
+            "end": "2021-01-25 19:07:20.752006", 
+            "failed": false, 
+            "invocation": {
+                "module_args": {
+                    "_raw_params": "kubectl get pods -n  microgwdelete-kctcfz-dev --kubeconfig ./UE2DCTPMCSAKS02-config-1611601635.yml | grep \\"edge\\" | grep \\"Running\\" | awk '{print $3}'", 
+                    "_uses_shell": true, 
+                    "argv": null, 
+                    "chdir": null, 
+                    "creates": null, 
+                    "executable": null, 
+                    "removes": null, 
+                    "stdin": null, 
+                    "stdin_add_newline": true, 
+                    "strip_empty_ends": true, 
+                    "warn": true
+                }
+            }, 
+            "item": {
+                "key": "cluster2", 
+                "value": {
+                    "clusterName": "UE2DCTPMCSAKS02", 
+                    "environment": "Development", 
+                    "location": "eastus", 
+                    "resourceGroupName": "UE2DAKSRSG02", 
+                    "subscription": "EY-CTSBP-DEV-CT-CONTAINERS_US-01-38370767"
+                }
+            }, 
+            "rc": 0, 
+            "start": "2021-01-25 19:07:19.461761", 
+            "stderr": "No resources found.", 
+            "stderr_lines": [
+                "No resources found."
+            ], 
+            "stdout": "", 
+            "stdout_lines": []
+        }, 
+        {
+            "ansible_loop_var": "item", 
+            "changed": true, 
+            "cmd": "kubectl get pods -n  microgwdelete-kctcfz-dev --kubeconfig ./UE2DCTPMCSAKS01-config-1611601635.yml | grep \\"edge\\" | grep \\"Running\\" | awk '{print $3}'", 
+            "delta": "0:00:01.607938", 
+            "end": "2021-01-25 19:07:22.521913", 
+            "failed": false, 
+            "invocation": {
+                "module_args": {
+                    "_raw_params": "kubectl get pods -n  microgwdelete-kctcfz-dev --kubeconfig ./UE2DCTPMCSAKS01-config-1611601635.yml | grep \\"edge\\" | grep \\"Running\\" | awk '{print $3}'", 
+                    "_uses_shell": true, 
+                    "argv": null, 
+                    "chdir": null, 
+                    "creates": null, 
+                    "executable": null, 
+                    "removes": null, 
+                    "stdin": null, 
+                    "stdin_add_newline": true, 
+                    "strip_empty_ends": true, 
+                    "warn": true
+                }
+            }, 
+            "item": {
+                "key": "cluster1", 
+                "value": {
+                    "clusterName": "UE2DCTPMCSAKS01", 
+                    "environment": "Development", 
+                    "location": "eastus2", 
+                    "resourceGroupName": "UE2DAKSRSG01", 
+                    "subscription": "EY-CTSBP-DEV-CT-CONTAINERS_US-01-38370767"
+                }
+            }, 
+            "rc": 0, 
+            "start": "2021-01-25 19:07:20.913975", 
+            "stderr": "", 
+            "stderr_lines": [], 
+            "stdout": "Running", 
+            "stdout_lines": [
+                "Running"
+            ]
+        }
+    ]
+}
+
+TASK [debug] *******************************************************************
+ok: [localhost] => (item={u'stderr_lines': [u'No resources found.'], u'ansible_loop_var': u'item', u'end': u'2021-01-25 19:07:20.752006', u'stdout': u'', u'item': {u'value': {u'clusterName': u'UE2DCTPMCSAKS02', u'environment': u'Development', u'subscription': u'EY-CTSBP-DEV-CT-CONTAINERS_US-01-38370767', u'resourceGroupName': u'UE2DAKSRSG02', u'location': u'eastus'}, u'key': u'cluster2'}, u'changed': True, u'rc': 0, u'failed': False, u'cmd': u'kubectl get pods -n  microgwdelete-kctcfz-dev --kubeconfig ./UE2DCTPMCSAKS02-config-1611601635.yml | grep "edge" | grep "Running" | awk \\'{print $3}\\'', u'stderr': u'No resources found.', u'delta': u'0:00:01.290245', u'invocation': {u'module_args': {u'creates': None, u'executable': None, u'_uses_shell': True, u'strip_empty_ends': True, u'_raw_params': u'kubectl get pods -n  microgwdelete-kctcfz-dev --kubeconfig ./UE2DCTPMCSAKS02-config-1611601635.yml | grep "edge" | grep "Running" | awk \\'{print $3}\\'', u'removes': None, u'argv': None, u'warn': True, u'chdir': None, u'stdin_add_newline': True, u'stdin': None}}, u'stdout_lines': [], u'start': u'2021-01-25 19:07:19.461761'}) => {
+    "msg": []
+}
+ok: [localhost] => (item={u'stderr_lines': [], u'ansible_loop_var': u'item', u'end': u'2021-01-25 19:07:22.521913', u'stdout': u'Running', u'item': {u'value': {u'clusterName': u'UE2DCTPMCSAKS01', u'environment': u'Development', u'subscription': u'EY-CTSBP-DEV-CT-CONTAINERS_US-01-38370767', u'resourceGroupName': u'UE2DAKSRSG01', u'location': u'eastus2'}, u'key': u'cluster1'}, u'changed': True, u'rc': 0, u'failed': False, u'cmd': u'kubectl get pods -n  microgwdelete-kctcfz-dev --kubeconfig ./UE2DCTPMCSAKS01-config-1611601635.yml | grep "edge" | grep "Running" | awk \\'{print $3}\\'', u'stderr': u'', u'delta': u'0:00:01.607938', u'invocation': {u'module_args': {u'creates': None, u'executable': None, u'_uses_shell': True, u'strip_empty_ends': True, u'_raw_params': u'kubectl get pods -n  microgwdelete-kctcfz-dev --kubeconfig ./UE2DCTPMCSAKS01-config-1611601635.yml | grep "edge" | grep "Running" | awk \\'{print $3}\\'', u'removes': None, u'argv': None, u'warn': True, u'chdir': None, u'stdin_add_newline': True, u'stdin': None}}, u'stdout_lines': [u'Running'], u'start': u'2021-01-25 19:07:20.913975'}) => {
+    "msg": [
+        "Running"
+    ]
+}
+
+TASK [Message to user that they have Micro Gateway already and that need to be deleted first] ***
+[WARNING]: conditional statements should not include jinja2 templating
+delimiters such as {{ }} or {% %}. Found: 'Running' in {{ item.stdout_lines }}
+skipping: [localhost] => (item={u'stderr_lines': [u'No resources found.'], u'ansible_loop_var': u'item', u'end': u'2021-01-25 19:07:20.752006', u'stdout': u'', u'item': {u'value': {u'clusterName': u'UE2DCTPMCSAKS02', u'environment': u'Development', u'subscription': u'EY-CTSBP-DEV-CT-CONTAINERS_US-01-38370767', u'resourceGroupName': u'UE2DAKSRSG02', u'location': u'eastus'}, u'key': u'cluster2'}, u'changed': True, u'rc': 0, u'failed': False, u'cmd': u'kubectl get pods -n  microgwdelete-kctcfz-dev --kubeconfig ./UE2DCTPMCSAKS02-config-1611601635.yml | grep "edge" | grep "Running" | awk \\'{print $3}\\'', u'stderr': u'No resources found.', u'delta': u'0:00:01.290245', u'invocation': {u'module_args': {u'creates': None, u'executable': None, u'_uses_shell': True, u'strip_empty_ends': True, u'_raw_params': u'kubectl get pods -n  microgwdelete-kctcfz-dev --kubeconfig ./UE2DCTPMCSAKS02-config-1611601635.yml | grep "edge" | grep "Running" | awk \\'{print $3}\\'', u'removes': None, u'argv': None, u'warn': True, u'chdir': None, u'stdin_add_newline': True, u'stdin': None}}, u'stdout_lines': [], u'start': u'2021-01-25 19:07:19.461761'}) 
+fatal: [localhost]: FAILED! => {"msg": "The conditional check ''Running' in {{ item.stdout_lines }}' failed. The error was: template error while templating string: expected token ',', got 'string'. String: {% if 'Running' in [u'Running'] %} True {% else %} False {% endif %}\\n\\nThe error appears to be in '/tmp/awx_1017442_vjnbgnyx/project/ctp-containers-namespace/playbooks/destroy-ctp-containers-ns-by-env.yml': line 130, column 7, but may\\nbe elsewhere in the file depending on the exact syntax problem.\\n\\nThe offending line appears to be:\\n\\n\\n    - name: Message to user that they have Micro Gateway already and that need to be deleted first\\n      ^ here\\n"}
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=11   changed=5    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+
